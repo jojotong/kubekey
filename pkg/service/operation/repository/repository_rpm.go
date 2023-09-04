@@ -63,7 +63,7 @@ func (r *RedhatPackageManager) Update() error {
 // Install installs common packages.
 func (r *RedhatPackageManager) Install(pkg ...string) error {
 	if len(pkg) == 0 {
-		pkg = []string{"openssl", "socat", "conntrack", "ipset", "ebtables", "chrony", "ipvsadm"}
+		pkg = []string{"openssl", "socat", "conntrack-tools", "ipset", "ebtables", "chrony", "ipvsadm"}
 	}
 	if _, err := r.SSHClient.SudoCmdf("yum install -y %s", strings.Join(pkg, " ")); err != nil {
 		return err

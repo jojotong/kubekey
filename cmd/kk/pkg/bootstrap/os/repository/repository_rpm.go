@@ -83,7 +83,7 @@ func (r *RedhatPackageManager) Update(runtime connector.Runtime) error {
 }
 
 func (r *RedhatPackageManager) Install(runtime connector.Runtime, pkg ...string) error {
-	defaultPkg := []string{"openssl", "socat", "conntrack", "ipset", "ebtables", "chrony", "ipvsadm"}
+	defaultPkg := []string{"openssl", "socat", "conntrack-tools", "ipset", "ebtables", "chrony", "ipvsadm"}
 	if len(pkg) == 0 {
 		pkg = defaultPkg
 	} else {
