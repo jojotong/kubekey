@@ -243,6 +243,9 @@ verify-gen: generate  ## Verify go generated files are up to date
 kk:
 	CGO_ENABLED=0 go build -trimpath -tags "$(BUILDTAGS)" -ldflags "$(LDFLAGS)" -o $(BIN_DIR)/kk github.com/kubesphere/kubekey/v3/cmd/kk;
 
+koca: kk
+	mc cp $(BIN_DIR)/kk koca/kubernetes/binary/kubekey/${RELEASE_TAG}/${ARCH}/kk
+
 ALL_MANAGERS = capkk k3s-bootstrap k3s-control-plane
 
 .PHONY: managers
@@ -372,7 +375,7 @@ test-e2e-k3s: ## Run e2e tests
 ##@ release:
 
 ## latest git tag for the commit, e.g., v0.3.10
-RELEASE_TAG ?= $(shell git describe --abbrev=0 2>/dev/null)
+RELEASE_TAG ?= $(shell git describe --abbrev=0 --tags 2>/dev/null)
 ifneq (,$(findstring -,$(RELEASE_TAG)))
     PRE_RELEASE=true
 endif
