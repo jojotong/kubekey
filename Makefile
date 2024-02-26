@@ -245,6 +245,11 @@ kk:
 
 koca: kk
 	mc cp $(BIN_DIR)/kk koca/kubernetes/binary/kubekey/${RELEASE_TAG}/${ARCH}/kk
+	docker buildx build -f koca.Dockerfile \
+		-t 119.91.121.198:38888/library/kubekey:${RELEASE_TAG} \
+		--platform=linux/arm64,linux/amd64 \
+		--push \
+		.
 
 ALL_MANAGERS = capkk k3s-bootstrap k3s-control-plane
 
